@@ -68,7 +68,7 @@ const fetch_journalEntries = async () => {
 }
 
     const create_new_journal_entry = async () => {
-        const json = await make_authorized_api_request('http://localhost:8000/core/create_journal_entry/', 'POST', { 
+        const json = await make_authorized_api_request('https://journaler-django.herokuapp.comlocalhost:8000/core/create_journal_entry/', 'POST', { 
             date: new Date().toISOString().slice(0, 10), /* Format date for API: YYYY-MM-DD*/
             description: "Write something about your day...", 
             mood: 'good'
