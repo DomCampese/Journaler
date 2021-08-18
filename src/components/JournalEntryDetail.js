@@ -86,7 +86,7 @@ const JournalEntryDetail = ({ journalEntries,
         if (!formDataIsValid(data)) {
             return;
         }
-        await make_authorized_api_request(`http://localhost:8000/core/update_journal_entry/${id}/`, 'PUT', {
+        await make_authorized_api_request(`https://journaler-django.herokuapp.com:8000/core/update_journal_entry/${id}/`, 'PUT', {
             date, description, mood, id 
         });
         showUserMessage("Journal Entry Saved", true);
