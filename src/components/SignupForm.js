@@ -48,7 +48,7 @@ const SignupForm = ({ setLogged_in,
         }
 
         try {
-            const response = await fetch('http://localhost:8000/core/users/', {
+            const response = await fetch('https://journaler-django.herokuapp.com/core/users/', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
