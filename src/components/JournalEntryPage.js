@@ -55,7 +55,7 @@ const make_authorized_api_request = async (url, method, body) => {
 
 const fetch_journalEntries = async () => {
     if (!logged_in) return;
-    const json = await make_authorized_api_request('http://localhost:8000/core/journal_entries/', 'GET');
+    const json = await make_authorized_api_request('https://journaler-django.herokuapp.com/core/journal_entries/', 'GET');
     /* Populate journal entries */
     let newJournalEntries = []
     for (const journalEntry of await json) {

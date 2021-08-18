@@ -39,7 +39,7 @@ const LoginForm = ({ errorMessage,
         
         try {
             /* Send username and password, recieve and store JWT */
-            const response = await fetch('http://localhost:8000/token-auth/', {
+            const response = await fetch('https://journaler-django.herokuapp.com/token-auth/', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

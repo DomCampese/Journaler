@@ -114,7 +114,7 @@ const JournalEntryDetail = ({ journalEntries,
     }
 
     const handle_delete = async (e) => {
-        await make_authorized_api_request(`http://localhost:8000/core/delete_journal_entry/${id}/`, 'DELETE');
+        await make_authorized_api_request(`https://journaler-django.herokuapp.com/core/delete_journal_entry/${id}/`, 'DELETE');
         showUserMessage("Journal Entry Deleted", true);
         fetch_journalEntries();
         setIsNewJournalEntry(false);
