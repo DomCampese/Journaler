@@ -1,0 +1,481 @@
+* {
+  font-size: 16px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.App {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh; /* Needs to be min height so it can increase */
+  position: relative;
+  overflow: scroll;
+}
+
+.topbar {
+  z-index: 100;
+  position: fixed;
+  height: 8vh;
+  min-height: 50px;
+  width: 100%;
+}
+
+.topbar-content {
+  height: 100%;
+  min-height: 50px;
+  width: 100%;
+  position: relative;
+  z-index: 100;
+  background-color: #0099ff;
+  border-bottom: 1.5px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.topbar-content h1 {
+  font-size: 30px;
+}
+
+.topbar-title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.topbar-logout-button-wrapper {
+  position: absolute;
+  margin-left: 35%;
+}
+
+.topbar-logout-button {
+  border: none;
+  background: none;
+  text-decoration: underline;
+  font-size: 16px;
+  color: black;
+}
+
+.topbar-logout-button:hover {
+  color: rgb(68, 68, 68);
+}
+
+.topbar-logout-button:active {
+  color: white;
+}
+
+.error-message {
+  opacity: 80%;
+  z-index: 100;
+  position: fixed;
+  width: 100%;
+  left: 0;
+  right: 0;
+  color: #D8000C;
+  margin: 8vh auto;
+  background-color: #FFBABA;
+  padding: 10px;
+}
+
+.success-message {
+  opacity: 80%;
+  z-index: 100;
+  position: fixed;
+  width: 100%;
+  left: 0;
+  right: 0;
+  color: #270;
+  margin: 8vh auto;
+  background-color: #DFF2BF;
+  padding: 10px;
+}
+
+.content-wrapper {
+  margin-top: 8vh;
+  min-height: 100vh;
+  width: 100vw;
+  margin-bottom: 18vh;
+}
+
+.content-wrapper-with-message {
+  margin-top: 5vh;
+  min-height: 100%;
+  margin-bottom: 18vh;
+}
+
+.login-signup-wrapper {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-form-wrapper {
+  border-radius: 20px;
+  background: #ffffff;
+  box-shadow:  8px 8px 29px #dbdbdb,
+              -8px -8px 29px #ffffff;
+  width: 400px;
+  height: 500px;
+  overflow: hidden;
+}
+
+.login-form-wrapper h4 {
+  font-size: 24px;
+  text-align: center;
+}
+
+.login-form {
+  margin: 10% 10% 15% 10%;
+}
+
+.signup-form-wrapper {
+  margin-top: 10vh;
+  border-radius: 20px;
+  background: #ffffff;
+  box-shadow:  8px 8px 29px #dbdbdb,
+              -8px -8px 29px #ffffff;
+  width: 400px;
+  min-height: 600px;
+  overflow: hidden;
+  margin: auto;
+}
+
+.signup-form-wrapper h4 {
+  font-size: 24px;
+  text-align: center;
+}
+
+.signup-form {
+  margin: 10% 10% 15% 10%;
+}
+
+.login-signup-input {
+  width: 100%;
+  border: none;
+  padding: 8px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.login-signup-button {
+  color: white;
+  background-color: #0099ff;
+  width: 100%;
+  height: 5%;
+  margin-top: 10%;
+  padding: 10px;
+  border: none;
+  border-radius: 100px 100px;
+}
+
+.login-signup-button:hover {
+  background-color: #24a7ff;
+}
+
+.login-signup-nav-wrapper {
+  text-align: center;
+  margin: 30px;
+}
+
+.login-signup-nav-button {
+  border: none;
+  background: none;
+  color: #0099ff;
+}
+
+.login-signup-nav-button:hover {
+  text-decoration: underline;
+}
+
+.journal-entry-page-content {
+  margin-top: 10vh;
+}
+
+.journal-entry-preview-list {
+  margin: 0 10vw 0 10vw;
+}
+
+.journal-entry-preview-title {
+  font-size: 26px;
+  text-align: center;
+}
+
+.journal-entry-preview {
+  z-index: 10;
+  line-height: 25px;
+  border-radius: 20px;
+  padding: 20px;
+  max-width: 80vw;
+  margin-bottom: 10px;
+  background: #ffffff;
+  box-shadow:  8px 8px 29px #dbdbdb,
+              -8px -8px 29px #ffffff;
+}
+
+.journal-entry-preview:hover {
+  box-shadow:  9px 9px 15px #dfdede,
+             -9px -9px 15px #ebebeb;
+  transform: scale(1.001);
+}
+
+.journal-entry-preview-label {
+  font-size: 18px;
+}
+
+.mood-image {
+  height: 40px;
+  width: 40px;
+}
+
+.journal-entry-detail-wrapper {
+  margin-top: 15vh;
+}
+
+.journal-entry-detail-form {
+  margin-top: 20px;
+  display: grid;
+  gap: 20px;
+  width: 35%;
+}
+
+.new-journal-entry-button-wrapper {
+  display: flex;
+	justify-content: center;
+  align-items:flex-start;
+  margin-bottom: 20px;
+}
+
+.new-journal-entry-button {
+  height: 42px;
+  width: 200px;
+  border-radius: 100px 100px;
+  background: #0099ff;
+  color: black;
+  border: none;
+  padding: 10px;
+  box-shadow:  8px 8px 29px #dbdbdb,
+              -8px -8px 29px #ffffff;
+}
+
+.new-journal-entry-button:hover {
+  transform: scale(1.05);
+}
+
+.new-journal-entry-button:active {
+  background-color: #24a7ff;
+}
+
+.new-journal-entry-button-inner-wrapper {
+  height: 100%;
+  width: 100%;
+  display: flex;
+	justify-content: center;
+  align-items: center;
+}
+
+.new-journal-entry-button-inner-wrapper p {
+  font-size: 18px;
+}
+
+.journal-entry-detail-form {
+  display: flex;
+  flex-direction: column;
+  width: 80vw;
+  margin-left: 10vw;
+}
+
+.go-back-button {
+  text-align: left;
+  border: none;
+  background-color: white;
+  font-size: 2px;
+  padding-left: 0px;
+}
+
+.go-back-button:hover {
+  color: gray;
+}
+
+.go-back-button:active {
+  color: gray;
+}
+
+.go-back-button-content {
+  display: flex;
+}
+
+.journal-entry-detail-label {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.journal-entry-detail-textarea {
+  line-height: 30px;
+  border: 1px solid black;
+  border-radius: 10px;
+  height: 300px;
+  resize: none;
+  padding: 10px;
+  font-size: 18px;
+}
+
+.good-mood-button {
+  height: 50px;
+  width: 50px;
+  margin-left: 6px;
+  margin-right: 6px;
+}
+
+.good-mood-button:hover {
+  transform: translateY(-5px);
+}
+
+.okay-mood-button {
+  height: 50px;
+  width: 50px;
+  margin-left: 6px;
+  margin-right: 6px;
+}
+
+.okay-mood-button:hover {
+  transform: rotate(20deg);
+}
+
+.bad-mood-button {
+  height: 50px;
+  width: 50px;
+  margin-left: 6px;
+  margin-right: 6px;
+}
+
+.bad-mood-button:hover {
+  transform: translateY(5px);
+}
+
+.mood-button:hover {
+  transform: rotate(15deg);
+}
+
+.mood-button-selected {
+  z-index: 0;
+  height: 50px;
+  width: 50px;
+  margin-left: 6px;
+  margin-right: 6px;
+  transition: transform .1s ease-in-out;
+  transform: scale(1.25);
+}
+
+.journal-entry-detail-save-button {
+  height: 40px;
+  width: 80px;
+  background-color: #0099ff;
+  border: none;
+  border-radius: 5px;
+  border: 1px solid black;
+}
+
+.journal-entry-detail-save-button:hover {
+  background-color: #24a7ff;
+}
+
+.journal-entry-detail-delete-button {
+  height: 40px;
+  width: 80px;
+  background-color: #0099ff;
+  border: none;
+  border-radius: 5px;
+  margin-left: 10px;
+  border: 1px solid black;
+}
+
+.journal-entry-detail-delete-button:hover {
+  background-color: #24a7ff;
+}
+
+.confirm-dialog-wrapper {
+  z-index: 10;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(10px);
+}
+
+.confirm-dialog-content {
+  text-align: center;
+  padding: 20px;
+  height: 120px;
+  width: 325px;
+  background-color: rgb(235, 231, 231);
+  color: black;
+  border-radius: 10px;
+}
+
+.confirm-dialog-message {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.confirm-dialog-confirm-button {
+  height: 40px;
+  width: 80px;
+  background-color: #0099ff;
+  border: none;
+  border-radius: 5px;
+  border: 1px solid black;
+}
+
+.confirm-dialog-confirm-button:hover {
+  background-color: #24a7ff;
+}
+
+.confirm-dialog-deny-button {
+  height: 40px;
+  width: 80px;
+  background-color: white;
+  border: none;
+  border-radius: 5px;
+  margin-left: 10px;
+  border: 1px solid black;
+}
+
+.confirm-dialog-deny-button:hover {
+  background-color: #e7e7e7;
+}
+
+.confirm-dialog-deny-button:active {
+  color: rgb(133, 132, 132);
+}
+
+.create-journal-entry-prompt-wrapper {
+  height: 50vh;
+  width: 100%;
+  text-align: center;
+}
+
+.create-journal-entry-prompt {
+  font-size: 26px;
+  text-align: center;
+}
+
+.loading-spinner-wrapper {
+  margin-top: 20vh;
+  display: flex;
+  justify-content: center;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  color: white;
+  background-color: black;
+  width: 100%;
+  height: 8vh;
+  display: flex;
+  justify-content: center;
+  align-items: center; 
+}
