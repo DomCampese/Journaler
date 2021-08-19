@@ -345,8 +345,7 @@
 .bad-mood-button {
   height: 50px;
   width: 50px;
-  margin-left: 6px;
-  margin-right: 6px;
+  margin: 6px;
 }
 
 .bad-mood-button:hover {
