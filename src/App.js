@@ -88,8 +88,8 @@ const App = () => {
 
     return (
         <div className="App">
-            <MessageBox errorMessage={errorMessage} successMessage={successMessage}/>
             <TopBar logged_in={logged_in} handle_logout={handle_logout}/>
+            <MessageBox errorMessage={errorMessage} successMessage={successMessage}/>
             <Footer/>
             <div className="content-wrapper">
                 <Switch>

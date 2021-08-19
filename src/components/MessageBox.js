@@ -7,7 +7,7 @@ const MessageBox = ({ successMessage, errorMessage }) => {
     return (
         <div>
             { errorMessage && <ErrorBox errorMessage={errorMessage}></ErrorBox> }
-            { successMessage && <SuccessBox successMessage={successMessage}></SuccessBox>} 
+            { successMessage && <SuccessBox successMessage={successMessage}></SuccessBox> } 
         </div>
     )
 }
