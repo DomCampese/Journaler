@@ -360,8 +360,7 @@
   z-index: 0;
   height: 50px;
   width: 50px;
-  margin-left: 6px;
-  margin-right: 6px;
+  margin: 6px;
   transition: transform .1s ease-in-out;
   transform: scale(1.25);
 }
