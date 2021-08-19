@@ -64,20 +64,20 @@
 }
 
 .error-message {
-  opacity: 80%;
-  z-index: 100;
+  opacity: .8;
+  margin: 8vh auto;
   position: fixed;
   width: 100%;
+  top: 0;
   left: 0;
   right: 0;
   color: #D8000C;
-  margin: 8vh auto;
   background-color: #FFBABA;
   padding: 10px;
 }
 
 .success-message {
-  opacity: 80%;
+  opacity: .8;
   z-index: 100;
   position: fixed;
   width: 100%;

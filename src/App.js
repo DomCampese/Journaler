@@ -89,9 +89,9 @@ const App = () => {
     return (
         <div className="App">
             <TopBar logged_in={logged_in} handle_logout={handle_logout}/>
-            <MessageBox errorMessage={errorMessage} successMessage={successMessage}/>
             <Footer/>
             <div className="content-wrapper">
+            <MessageBox errorMessage={errorMessage} successMessage={successMessage}/>
                 <Switch>
                     <Route path='/login'> 
                         <LoginForm  
