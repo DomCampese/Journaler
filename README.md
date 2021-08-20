@@ -1,3 +1,3 @@
 # Journaler
-[Journaler](https://journaler.netlify.app) is a mental health tool that allows a user to create, edit, and delete journal entries and track their mood which serves as an outlet for stress. Feel free to try it out!
+[Journaler](https://journaler.netlify.app) is a mental health tool that lets a user create and edit journal entries to track their mood, reflect on their day, or just vent. It is built with a React frontend and a Django backend REST API using JWT Authentication. This repository only contains the frontend source code.
 
