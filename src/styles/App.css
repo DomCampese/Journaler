@@ -159,6 +159,7 @@
 }
 
 .login-signup-button {
+  -webkit-appearance: none;
   color: white;
   background-color: #0099ff;
   width: 100%;
@@ -364,6 +365,7 @@
 }
 
 .journal-entry-detail-save-button {
+  -webkit-appearance: none;
   height: 40px;
   width: 80px;
   background-color: #0099ff;
@@ -377,6 +379,7 @@
 }
 
 .journal-entry-detail-delete-button {
+  -webkit-appearance: none;
   height: 40px;
   width: 80px;
   background-color: #0099ff;
