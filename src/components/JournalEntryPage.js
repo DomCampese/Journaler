@@ -84,7 +84,7 @@ const fetch_journalEntries = async () => {
     /* Format a date from the server to be more readable */
     const formatDate = (date) => {
         const parts = date.split('-');
-        return new Date(parts[0], parts[1]-1, parts[2]-1).toDateString();
+        return new Date(parts[0], parts[1], parts[2]-1).toDateString();
     }
 
     return (
