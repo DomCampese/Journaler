@@ -5,6 +5,7 @@ import MessageBox from './components/MessageBox';
 import Footer from './components/Footer';
 import SignupForm from './components/SignupForm';
 import LoginForm from './components/LoginForm';
+import ScrollToTop from './components/ScrollToTop';
 import './styles/App.css'
 import JournalEntryPage from './components/JournalEntryPage';
 import PageNotFound from './components/PageNotFound';
@@ -92,6 +93,7 @@ const App = () => {
             <Footer/>
             <div className="content-wrapper">
             <MessageBox errorMessage={errorMessage} successMessage={successMessage}/>
+                <ScrollToTop />
                 <Switch>
                     <Route path='/login'> 
                         <LoginForm  
