@@ -24,8 +24,11 @@ const App = () => {
             redirectTo('/login');
         }
 
-        /* domain.com should never send a 404, so send user to an appropriate page */
-        if (location.pathname === '/') {
+        /* 
+         * Redirect to an appopriate page when user enters domain.com or the 
+         * location has not yet loaded (first entering the site) 
+         */
+        if (!location.pathname || location.pathname === '/') {
             redirectTo(logged_in ? '/my-journal-entries' : '/login');
         }
     }, [location]);
