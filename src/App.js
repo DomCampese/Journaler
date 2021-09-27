@@ -15,7 +15,7 @@ const App = () => {
     const [errorMessage, setErrorMessage] = useState('');
     const [successMessage, setSuccessMessage] = useState('');
     const location = useLocation();
-    const history = useHistory(logged_in ? '/my-journal-entries' : 'login');
+    const history = useHistory(logged_in ? '/my-journal-entries' : '/login');
 
     useEffect(() => {
         /* Redirect to login when an unauthenticated user attempts to visit a secure page */
