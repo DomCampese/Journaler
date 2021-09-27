@@ -8,7 +8,6 @@ import LoginForm from './components/LoginForm';
 import ScrollToTop from './components/ScrollToTop';
 import './styles/App.css'
 import JournalEntryPage from './components/JournalEntryPage';
-import PageNotFound from './components/PageNotFound';
 
 const App = () => {
     const [logged_in, setLogged_in] = useState(localStorage.getItem('token') ? true : false);
@@ -128,9 +127,6 @@ const App = () => {
                                           errorEnum={errorEnum}
                                           handle_logout={handle_logout}
                         />
-                    </Route>
-                    <Route>
-                        <PageNotFound></PageNotFound>
                     </Route>
                 </Switch>
             </div>
