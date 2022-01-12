@@ -486,6 +486,10 @@
     position: relative;
   }
 
+  .content-wrapper {
+    margin-top: 2vh;
+  }
+
   .login-form-wrapper {
     box-shadow: none;
   }
@@ -499,7 +503,7 @@
 
   .login-signup-wrapper {
     align-items: baseline;
-    height: 100vh;
+    height: auto;
   }
 }
 
