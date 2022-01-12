@@ -479,3 +479,22 @@
   justify-content: center;
   align-items: center; 
 }
+
+/* Mobile-specific */
+@media (max-width: 500px) {
+  .topbar {
+    position: relative;
+  }
+
+  .login-form-wrapper {
+    box-shadow: none;
+  }
+  .signup-form-wrapper {
+    box-shadow: none;
+  }
+
+  .error-message {
+    position: absolute;
+  }
+}
+
