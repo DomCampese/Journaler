@@ -496,5 +496,10 @@
   .error-message {
     position: absolute;
   }
+
+  .login-signup-wrapper {
+    align-items: baseline;
+    height: 100vh;
+  }
 }
 
