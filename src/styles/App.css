@@ -493,6 +493,7 @@
   .login-form-wrapper {
     box-shadow: none;
   }
+
   .signup-form-wrapper {
     box-shadow: none;
   }
@@ -501,9 +502,17 @@
     position: absolute;
   }
 
+  .success-message {
+    position: absolute;
+  }
+
   .login-signup-wrapper {
     align-items: baseline;
     height: auto;
   }
+
+  .journal-entry-preview-list {
+    margin: 0 5vw 0 5vw;
+  }  
 }
 
