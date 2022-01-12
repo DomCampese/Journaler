@@ -514,5 +514,12 @@
   .journal-entry-preview-list {
     margin: 0 5vw 0 5vw;
   }  
+
+  .journal-entry-detail-form {
+    display: flex;
+    flex-direction: column;
+    width: 85vw;
+    margin-left: 5vw;
+  }
 }
 
