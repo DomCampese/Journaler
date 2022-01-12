@@ -518,7 +518,7 @@
   .journal-entry-detail-form {
     display: flex;
     flex-direction: column;
-    width: 85vw;
+    width: 90vw;
     margin-left: 5vw;
   }
 }
