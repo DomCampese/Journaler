@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Switch, Route, useHistory, useLocation } from 'react-router-dom';
 import TopBar from './components/TopBar';
 import MessageBox from './components/MessageBox';
@@ -10,9 +10,12 @@ import './styles/App.css'
 import JournalEntryPage from './components/JournalEntryPage';
 
 const App = () => {
+    const [isLoading, setIsLoading] = useState(false);
     const [logged_in, setLogged_in] = useState(localStorage.getItem('token') ? true : false);
     const [errorMessage, setErrorMessage] = useState('');
     const [successMessage, setSuccessMessage] = useState('');
+    const [previousTimeoutId, setPreviousTimeoutId] = useState(null);
+    const [activeTimeouts, setActiveTimeouts] = useState([]);
     const location = useLocation();
     const history = useHistory(logged_in ? '/my-journal-entries' : '/login');
 
@@ -64,19 +67,29 @@ const App = () => {
     }
 
     const showUserMessage = async (message, isSuccess) => {
-        const delayedAction = (action, seconds) => {
-            setTimeout(action, (seconds * 1000));
-        }
-
         /* Show message for five seconds */
+        let id;
         if (isSuccess) {
             setErrorMessage('');
             setSuccessMessage(message);
-            delayedAction(() => setSuccessMessage(''), 5);
+            /* Clear all active timeouts */
+            for (let timeout of activeTimeouts) {
+                clearTimeout(timeout);
+            }
+            id = setTimeout(() => {
+                setSuccessMessage('');
+            }, 5000);
+            setActiveTimeouts(oldArray => [...oldArray, id]);
         } else {
             setSuccessMessage('');
             setErrorMessage(message);
-            delayedAction(() => setErrorMessage('') , 5);
+            for (let timeout of activeTimeouts) {
+                clearTimeout(timeout);
+            }
+            id = setTimeout(() => {
+                setErrorMessage('');
+            }, 5000);
+            setActiveTimeouts(oldArray => [...oldArray, id]);
         }
     }
 
@@ -106,6 +119,8 @@ const App = () => {
                             redirectTo={redirectTo}
                             clearErrors={clearErrors}
                             formDataIsValid={formDataIsValid}
+                            isLoading
+                            setIsLoading={setIsLoading}
                         />    
                     </Route>
                     <Route path='/signup'>
@@ -117,6 +132,8 @@ const App = () => {
                             redirectTo={redirectTo}
                             clearErrors={clearErrors}
                             formDataIsValid={formDataIsValid}
+                            isLoading
+                            setIsLoading={setIsLoading}
                         />
                     </Route>
                     <Route path='/my-journal-entries' >      
@@ -126,6 +143,8 @@ const App = () => {
                                           showUserMessage={showUserMessage}
                                           errorEnum={errorEnum}
                                           handle_logout={handle_logout}
+                                          isLoading={isLoading}
+                                          setIsLoading={setIsLoading}
                         />
                     </Route>
                 </Switch>

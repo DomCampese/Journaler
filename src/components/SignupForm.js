@@ -6,6 +6,7 @@ import { InputAdornment } from '@material-ui/core';
 import EmailIcon from '@material-ui/icons/Email'
 import PersonIcon from '@material-ui/icons/Person';
 import LockIcon from '@material-ui/icons/Lock';
+import LoadingSpinner from "./LoadingSpinner";
 
 const SignupForm = ({ setLogged_in,
                       formDataIsValid,
@@ -13,7 +14,9 @@ const SignupForm = ({ setLogged_in,
                       errorEnum, 
                       redirectTo, 
                       clearErrors,
-                      showUserMessage }) => {
+                      showUserMessage,
+                      isLoading,
+                      setIsLoading }) => {
     
     const [email, setEmail] = useState('');
     const [username, setUsername] = useState('');
@@ -47,6 +50,7 @@ const SignupForm = ({ setLogged_in,
             return; 
         }
 
+        setIsLoading(true);
         try {
             const response = await fetch('https://journaler-django.herokuapp.com/core/users/', {
                 method: 'POST',
@@ -57,95 +61,103 @@ const SignupForm = ({ setLogged_in,
             });
             if (!response.ok) {
                 showUserMessage(errorEnum.ACCOUNT_CREATION_ERROR, false);
+                setIsLoading(false);
                 return;
             }
             const json = await response.json(); 
             localStorage.setItem('token', json.token);
             setLogged_in(true);
+            setIsLoading(false);
             redirectTo('my-journal-entries');
         } catch(error) {
             showUserMessage(errorEnum.GENERAL_ERROR);
         }
+        setIsLoading(false);
     }
 
     return (
         <div className="login-signup-wrapper">
-            <div className="signup-form-wrapper">
-            <form 
-                className="signup-form" 
-                autoComplete="off"
-                onSubmit={ (e) => {
-                    handle_signup(e, { 
-                                        email: email,
-                                        username: username,
-                                        password: password,
-                                        confirmPassword: confirmPassword 
-                                     } 
-                    )}
-                }
-            >
-                <h4>Sign Up</h4>
-                <label htmlFor="username">Username</label>
-                <Input 
-                    className="login-signup-input"
-                    startAdornment={
+            { isLoading
+                ? (
+                <div className="signup-form-wrapper">
+                <form 
+                    className="signup-form" 
+                    autoComplete="off"
+                    onSubmit={ (e) => {
+                        handle_signup(e, { 
+                                            email: email,
+                                            username: username,
+                                            password: password,
+                                            confirmPassword: confirmPassword 
+                                        } 
+                        )}
+                    }
+                >
+                    <h4>Sign Up</h4>
+                    <label htmlFor="username">Username</label>
+                    <Input 
+                        className="login-signup-input"
+                        startAdornment={
+                            <InputAdornment position="start">
+                                <PersonIcon/>
+                            </InputAdornment>
+                        }
+                        type="text"
+                        name="username"
+                        value={username}
+                        placeholder="username"
+                        onChange={handle_change}
+                        error={errorMessage === errorEnum.EMPTY_FIELDS_ERROR && username === ''}
+                    />
+                    <label htmlFor="email">Email</label>
+                    <Input 
+                        className="login-signup-input"
+                        startAdornment={
+                            <InputAdornment position="start">
+                                <EmailIcon/>
+                            </InputAdornment>
+                        }
+                        type="text"
+                        name="email"
+                        value={email}
+                        placeholder="email"
+                        onChange={handle_change}
+                        error={errorMessage === errorEnum.EMPTY_FIELDS_ERROR && email === ''}
+                    />
+                    <label htmlFor="password">Password</label>
+                    <Input className="login-signup-input"
+                        startAdornment={
                         <InputAdornment position="start">
-                            <PersonIcon/>
+                            <LockIcon/>
                         </InputAdornment>
-                    }
-                    type="text"
-                    name="username"
-                    value={username}
-                    placeholder="username"
-                    onChange={handle_change}
-                    error={errorMessage === errorEnum.EMPTY_FIELDS_ERROR && username === ''}
-                />
-                <label htmlFor="email">Email</label>
-                <Input 
-                    className="login-signup-input"
-                    startAdornment={
+                        }
+                        type="password"
+                        name="password"
+                        value={password}
+                        placeholder="password"
+                        onChange={handle_change}
+                        error={errorMessage === errorEnum.EMPTY_FIELDS_ERROR && password === ''}
+                    />
+                    <Input className="login-signup-input"
+                        startAdornment={
                         <InputAdornment position="start">
-                            <EmailIcon/>
+                            <LockIcon/>
                         </InputAdornment>
-                    }
-                    type="text"
-                    name="email"
-                    value={email}
-                    placeholder="email"
-                    onChange={handle_change}
-                    error={errorMessage === errorEnum.EMPTY_FIELDS_ERROR && email === ''}
-                />
-                <label htmlFor="password">Password</label>
-                <Input className="login-signup-input"
-                    startAdornment={
-                    <InputAdornment position="start">
-                        <LockIcon/>
-                    </InputAdornment>
-                    }
-                    type="password"
-                    name="password"
-                    value={password}
-                    placeholder="password"
-                    onChange={handle_change}
-                    error={errorMessage === errorEnum.EMPTY_FIELDS_ERROR && password === ''}
-                />
-                <Input className="login-signup-input"
-                    startAdornment={
-                    <InputAdornment position="start">
-                        <LockIcon/>
-                    </InputAdornment>
-                    }
-                    type="password"
-                    name="confirmPassword"
-                    value={confirmPassword}
-                    placeholder="confirm password"
-                    onChange={handle_change}
-                    error={errorMessage === errorEnum.EMPTY_FIELDS_ERROR && confirmPassword === ''}
-                />
-                <input className="login-signup-button" type="submit" value="Sign Up" />
-            </form>
-            <LoginSignupNav isLoginForm={false} redirectTo={redirectTo} clearErrors={clearErrors}/>
-        </div>
+                        }
+                        type="password"
+                        name="confirmPassword"
+                        value={confirmPassword}
+                        placeholder="confirm password"
+                        onChange={handle_change}
+                        error={errorMessage === errorEnum.EMPTY_FIELDS_ERROR && confirmPassword === ''}
+                    />
+                    <input className="login-signup-button" type="submit" value="Sign Up" />
+                </form>
+                <LoginSignupNav isLoginForm={false} redirectTo={redirectTo} clearErrors={clearErrors}/>
+            </div>
+            ) : (
+                <LoadingSpinner visible={isLoading}/>  
+            )}
         </div>
     );
 }

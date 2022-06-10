@@ -5,6 +5,7 @@ import { Input } from '@material-ui/core';
 import { InputAdornment } from '@material-ui/core';
 import PersonIcon from '@material-ui/icons/Person';
 import LockIcon from '@material-ui/icons/Lock';
+import LoadingSpinner from "./LoadingSpinner";
 
 const LoginForm = ({ errorMessage,
                      setLogged_in,
@@ -12,7 +13,9 @@ const LoginForm = ({ errorMessage,
                      redirectTo,
                      clearErrors,
                      formDataIsValid,
-                     showUserMessage }) => {
+                     showUserMessage,
+                     isLoading,
+                     setIsLoading }) => {
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -37,6 +40,7 @@ const LoginForm = ({ errorMessage,
             return; 
         }  
         
+        setIsLoading(true);
         try {
             /* Send username and password, recieve and store JWT */
             const response = await fetch('https://journaler-django.herokuapp.com/token-auth/', {
@@ -49,59 +53,67 @@ const LoginForm = ({ errorMessage,
             if (!response.ok) {
                 console.log(response.error)
                 showUserMessage(errorEnum.USERNAME_OR_PASSWORD_ERROR, false);
+                setIsLoading(false);
                 return;
             }
             const json = await response.json();
             localStorage.setItem('token', json.token);
             setLogged_in(true);
+            setIsLoading(false);
             redirectTo('my-journal-entries');
         } catch(error) {
             showUserMessage(errorEnum.GENERAL_ERROR);
+            setIsLoading(false);
         }
     }
 
     return (        
         <div className="login-signup-wrapper">
-            <div className="login-form-wrapper">
-                <h4>Login</h4>
-                <form 
-                    className="login-form" 
-                    onSubmit={(e) => {
-                        handle_login(e, {username: username, password: password})}
-                    }
-                >
-                    <label htmlFor="username">Username</label>
-                    <Input className="login-signup-input"
-                        startAdornment={
-                            <InputAdornment position="start">
-                                <PersonIcon/>
-                            </InputAdornment>
-                        }
-                        type="text"
-                        name="username"
-                        value={username}
-                        placeholder="username"
-                        onChange={handle_change}
-                        error={errorMessage === errorEnum.EMPTY_FIELDS_ERROR && username.length === 0}
-                    />
-                    <label htmlFor="password">Password</label>
-                    <Input className="login-signup-input"
-                        startAdornment={
-                            <InputAdornment position="start">
-                                <LockIcon/>
-                            </InputAdornment>
-                        }
-                        type="password"
-                        name="password"
-                        value={password}
-                        placeholder="password"
-                        onChange={handle_change}
-                        error={errorMessage === errorEnum.EMPTY_FIELDS_ERROR && password === ''}
-                    />
-                    <input className="login-signup-button" type="submit" value="Login"/>
-                </form>
-                <LoginSignupNav isLoginForm={true} redirectTo={redirectTo} clearErrors={clearErrors}/>
-            </div>
+            { isLoading
+                ? (
+                    <div className="login-form-wrapper">
+                        <h4>Login</h4>
+                        <form 
+                            className="login-form" 
+                            onSubmit={(e) => {
+                                handle_login(e, {username: username, password: password})}
+                            }
+                        >
+                            <label htmlFor="username">Username</label>
+                            <Input className="login-signup-input"
+                                startAdornment={
+                                    <InputAdornment position="start">
+                                        <PersonIcon/>
+                                    </InputAdornment>
+                                }
+                                type="text"
+                                name="username"
+                                value={username}
+                                placeholder="username"
+                                onChange={handle_change}
+                                error={errorMessage === errorEnum.EMPTY_FIELDS_ERROR && username.length === 0}
+                            />
+                            <label htmlFor="password">Password</label>
+                            <Input className="login-signup-input"
+                                startAdornment={
+                                    <InputAdornment position="start">
+                                        <LockIcon/>
+                                    </InputAdornment>
+                                }
+                                type="password"
+                                name="password"
+                                value={password}
+                                placeholder="password"
+                                onChange={handle_change}
+                                error={errorMessage === errorEnum.EMPTY_FIELDS_ERROR && password === ''}
+                            />
+                            <input className="login-signup-button" type="submit" value="Login"/>
+                        </form>
+                        <LoginSignupNav isLoginForm={true} redirectTo={redirectTo} clearErrors={clearErrors}/>
+                    </div>
+                ) : (
+                    <LoadingSpinner visible={isLoading}/>
+                )}
         </div>
     );
 }

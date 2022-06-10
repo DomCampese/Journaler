@@ -11,13 +11,14 @@ const JournalEntryPage = ({ logged_in,
                             formDataIsValid, 
                             showUserMessage, 
                             errorEnum,
-                            handle_logout }) => {
+                            handle_logout,
+                            setIsLoading,
+                            isLoading }) => {
 
     const { path } = useRouteMatch();
     const [journalEntries, setJournalEntries] = useState([]);
     const [userHasJournalEntries, setUserHasJournalEntries] = useState(true);
     const [isNewJournalEntry, setIsNewJournalEntry] = useState(false);
-    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         fetch_journalEntries();
@@ -29,7 +30,7 @@ const JournalEntryPage = ({ logged_in,
  */
 const make_authorized_api_request = async (url, method, body) => {
     try {
-        setLoading(true);
+        setIsLoading(true);
         const response = await fetch(url, {
             method: method,
             headers: {
@@ -42,13 +43,13 @@ const make_authorized_api_request = async (url, method, body) => {
             if (response.statusText === 'Unauthorized') {
                 handle_logout();
             }
-            setLoading(false);
+            setIsLoading(false);
             return;
         }
-        setLoading(false);
+        setIsLoading(false);
         return await response.json();
     } catch (error) {
-        setLoading(false);
+        setIsLoading(false);
         showUserMessage(errorEnum.GENERAL_ERROR);
     }
 }
@@ -89,10 +90,10 @@ const fetch_journalEntries = async () => {
 
     return (
         <div className="journal-entry-page-content">
-            <LoadingSpinner visible={loading}/> 
+            <LoadingSpinner visible={isLoading}/> 
             <Switch>
                 <Route path={`${path}/:id`}>
-                {(!loading) && (<JournalEntryDetail journalEntries={journalEntries}
+                {(!isLoading) && (<JournalEntryDetail journalEntries={journalEntries}
                                                     redirectTo={redirectTo}
                                                     formDataIsValid={formDataIsValid}
                                                     fetch_journalEntries={fetch_journalEntries}
@@ -107,7 +108,7 @@ const fetch_journalEntries = async () => {
                    
                 </Route>
                 <Route path={path}>
-                    {(!loading) && (
+                    {(!isLoading) && (
                         <>
                             <h1 className="journal-entry-preview-title">My Journal Entries</h1>    
                             <CreateJournalEntryButton create_new_journal_entry={create_new_journal_entry}></CreateJournalEntryButton>
